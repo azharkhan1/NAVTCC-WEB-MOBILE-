@@ -51,6 +51,7 @@ var otpModel = mongoose.model("otp", otpSchema);
 var tweetsSchema = mongoose.Schema({
     userEmail : String,
     tweetText : String,
+    userName : String,
     
 })
 

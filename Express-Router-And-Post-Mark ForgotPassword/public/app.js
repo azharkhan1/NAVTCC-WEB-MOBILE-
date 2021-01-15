@@ -85,7 +85,7 @@ function getProfile(){
         console.log("welcoming user==>",response);
         console.log(response.data);
         document.getElementById('welcomeUser').innerHTML = response.data.profile.userName
-
+        getTweets();
     }, (error) => {
         console.log(error.message);
         location.href = "./login.html"
@@ -131,32 +131,42 @@ function checkOtp(){
     
     }
 
-    // axios({
-    //     method: 'post',
-    //     url: url+"/auth/forget-password-step-2",
-    //     data: {
-    //      userEmail : document.getElementById("email").value.toLowerCase(),
-    //      otp: document.getElementById("otp").value,
-    //      newPassword : document.getElementById("newPassword").value,
-    //     }
-    // }).then((response) => {
-    //     console.log(response.data.status);
-    //     if (response.data.status == 200)
-    //     {
-    //         alert(JSON.stringify(response.data.message));
-
-    //     }
-    //     else{
-    //         alert(JSON.stringify(response.data.message));
-    //     }
-       
-    // }, (error) => {
-    //     console.log(error);
-    //     alert(JSON.stringify(error.message));
-    // });
     return false;
 
 }
+
+const getTweets = () => {
+
+    
+    const Http = new XMLHttpRequest();
+    Http.open("GET", url + "/getTweets");
+    Http.send();
+    Http.onreadystatechange = (e) => {
+        if (Http.readyState === 4) {
+
+            let data = JSON.parse((Http.responseText));
+            console.log(tweets);
+            for (let i = 0; i < tweets.tweets.length; i++) {
+         
+
+                var eachTweet = document.createElement("li");
+                eachTweet.innerHTML =
+                    `<h4 class="userName">
+                    ${tweets.tweets[i].userName}
+                </h4> 
+                <p class="userPost">
+                    ${tweets.tweets[i].tweetText}
+                </p>`;
+                // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
+                document.getElementById("posts").appendChild(eachTweet)
+
+            }
+        }
+    }
+}
+
+
+
 
 
 

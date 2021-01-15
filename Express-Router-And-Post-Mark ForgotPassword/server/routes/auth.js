@@ -2,13 +2,14 @@ var express = require("express");
 var bcrypt = require("bcrypt-inzi");
 var postmark = require("postmark");
 var jwt = require("jsonwebtoken");
-var cookieParser = require("cookie-parser");
+
 var { SERVER_SECRET } = require("../core");
-var { userModel , otpModel , tweetsModel } = require("../derepo");
+var { userModel , otpModel  } = require("../derepo");
 
 var api = express.Router();
 
 var client = new postmark.Client("78f129ec-7f98-474a-a27b-5c702452ac2b");
+
 
 
 api.post("/signup", (req, res, next) => {
@@ -265,41 +266,11 @@ api.post("/forget-password-step-2", (req, res, next) => {
         });
 });
 
-api.post("/tweet" , (req,res,next)=>{
 
-    if(!req.body.userEmail || !req.body.tweet)
-    {
-        res.status(409).send(`
-            Please send useremail and tweet in json body
-            e.g:
-            "userEmail" : "abc@gmail.com",
-            "tweetText" : "xxxxxx"
-        `)
-        return;
-    }
-
-    tweetsModel.create({
-        userEmail : req.body.userEmail,
-        tweetText : req.body.tweet,
-    }).then((data)=>{
-        console.log("Tweet created"),
-        res.status(200).send({
-            message : "tweet created",
-        })
-    }).catch((err)=>{
-        res.status(500).send({
-            message : "an error occured : "+err,
-        });
-    })
-
-
-
-
-})
 
 
 
 module.exports = api;
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
-} 
+} ;

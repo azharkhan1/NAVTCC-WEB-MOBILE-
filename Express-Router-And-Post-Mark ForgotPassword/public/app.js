@@ -95,8 +95,6 @@ function getProfile(){
 }
 
 function forgot_password(){
-
-
     axios({
         method: 'post',
         url: url+"/auth/forget-password",

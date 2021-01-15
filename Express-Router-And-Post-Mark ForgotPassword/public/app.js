@@ -2,6 +2,11 @@
 // const url = 'https://loginjwtmongo.herokuapp.com';
 const url = "http://localhost:5000";
 
+var socket = io(url);
+
+socket.on('connect', function () {
+    console.log("I am connected");
+  });
 
 
 const signup = () => {
@@ -145,17 +150,17 @@ const getTweets = () => {
         if (Http.readyState === 4) {
 
             let data = JSON.parse((Http.responseText));
-            console.log(tweets);
-            for (let i = 0; i < tweets.tweets.length; i++) {
+            console.log(data);
+            for (let i = 0; i < data.tweets.length; i++) {
          
 
                 var eachTweet = document.createElement("li");
                 eachTweet.innerHTML =
                     `<h4 class="userName">
-                    ${tweets.tweets[i].userName}
+                    ${data.tweets[i].userName}
                 </h4> 
                 <p class="userPost">
-                    ${tweets.tweets[i].tweetText}
+                    ${data.tweets[i].tweetText}
                 </p>`;
                 // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
                 document.getElementById("posts").appendChild(eachTweet)
@@ -165,7 +170,21 @@ const getTweets = () => {
     }
 }
 
+socket.on("NEW_POST", (newPost)=>{
 
+
+    console.log("newPost ==> ", newPost);
+    var eachTweet = document.createElement("li");
+    eachTweet.innerHTML =
+        `<h4 class="userName">
+        ${newPost.userName}
+    </h4> 
+    <p class="userPost">
+        ${newPost.tweetText}
+    </p>`;
+    // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
+    document.getElementById("posts").appendChild(eachTweet)
+})
 
 
 

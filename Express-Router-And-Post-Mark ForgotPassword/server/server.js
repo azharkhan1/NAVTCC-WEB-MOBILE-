@@ -126,6 +126,7 @@ app.post("/postTweets", (req, res, next) => {
                             userName: user.userName,
                             userEmail: user.userEmail,
                         });
+                        io.emit("NEW_POST" , data);
                 }).catch((err) => {
                     res.status(500).send({
                         message: "an error occured : " + err,

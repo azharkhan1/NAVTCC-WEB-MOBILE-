@@ -280,16 +280,17 @@ button:hover {
 .posts__container{
     margin: 0 auto;
     /* text-align: center; */
-    display: flex;
+    /* display: flex; */
     justify-content: center;
-    position: relative;
+    /* position: relative; */
 }
 li{
   list-style: none;
-    padding: 10px;
-    font-size: 18px;
-    /* padding: 10px; */
-    transform: rotate(-180deg);
+  padding: 10px;
+  font-size: 18px;
+  /* padding: 10px; */
+  transform: rotate(-180deg);
+  text-align: justify;
 }
 ul{
   transform: rotate(180deg);
@@ -320,6 +321,7 @@ ul{
   .myCard{
       display:flex;
       overflow: hidden;
+      position: relative;
   }
   .posts__input{
     width:450px;
@@ -342,9 +344,10 @@ ul{
 .timeago{
   display: inline-block;
   /* float: right; */
-  position: absolute;
-  right: -36px;
-  top: 20px;
+  /* position: absolute; */
+  right: -24px;
+  /* top: 20px; */
   font-size: 10px;
   font-weight: bolder;
+  position: relative;
 }

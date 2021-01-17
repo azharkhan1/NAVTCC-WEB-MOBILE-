@@ -39,9 +39,6 @@ const signup = () => {
             else {
                 alert(jsonRes.message);
             }
-
-
-
         }
     }
     return false;
@@ -161,25 +158,25 @@ const getTweets = () => {
     Http.send();
     Http.onreadystatechange = (e) => {
         if (Http.readyState === 4) {
-       
+
             data = JSON.parse((Http.responseText));
             // console.log(data);
-    
+
             for (let i = 0; i < data.tweets.length; i++) {
-                date = moment((data.tweets[i].createdOn)).fromNow()  
+                date = moment((data.tweets[i].createdOn)).fromNow()
                 // if (data.tweets[i].userEmail !== userEmail) {
-                    var eachTweet = document.createElement("li");
-                    eachTweet.innerHTML =
-                        `<h4 class="userName">
+                var eachTweet = document.createElement("li");
+                eachTweet.innerHTML =
+                    `<h4 class="userName">
                     ${data.tweets[i].userName}
                 </h4> 
                 <small class="timeago">${date}</small>
                 <p class="userPost" datetime=${date}>
                     ${data.tweets[i].tweetText}
                 </p>`;
-           
-                    // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
-                    document.getElementById("posts").appendChild(eachTweet)
+
+                // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
+                document.getElementById("posts").appendChild(eachTweet)
                 // }
             }
         }
@@ -199,7 +196,7 @@ const postTweet = () => {
         userEmail: userEmail,
         tweetText: document.getElementById("tweetText").value,
     }))
- 
+
 
     document.getElementById("tweetText").value = "";
 
@@ -236,11 +233,13 @@ const myTweets = () => {
 }
 
 socket.on("NEW_POST", (newPost) => {
+
     var eachTweet = document.createElement("li");
     eachTweet.innerHTML =
         `<h4 class="userName">
         ${newPost.userName}
     </h4> 
+    <small class="timeago">${moment(newPost.createdOn).fromNow()}</small>
     <p class="userPost">
         ${newPost.tweetText}
     </p>`;

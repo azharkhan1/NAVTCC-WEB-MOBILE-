@@ -21,12 +21,6 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIo(server);
 
-io.on("connection", (user) => {
-    console.log("user connected" , user);
-    io.emit("hahaha");
-})
-
-
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cors({
@@ -100,8 +94,8 @@ app.get("/profile", (req, res, next) => {
         })
 });
 
-app.post("/postTweets", (req, res, next) => {
-
+app.post("/postTweet", (req, res, next) => {
+    console.log("req body of tweet ",req.body);
     if (!req.body.userEmail || !req.body.tweetText) {
         res.status(409).send(`
             Please send useremail and tweet in json body

@@ -237,7 +237,6 @@ api.post("/forget-password-step-2", (req, res, next) => {
 
                             if (otpData.otp === req.body.otp && diff < 300000) { // correct otp code
                                 otpData.remove()
-
                                 bcrypt.stringToHash(req.body.newPassword).then(function (hash) {
                                     user.update({ userPassword: hash }, {}, function (err, data) {
                                         res.status(200).send({

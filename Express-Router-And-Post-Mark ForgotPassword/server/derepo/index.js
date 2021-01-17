@@ -52,7 +52,7 @@ var tweetsSchema = mongoose.Schema({
     userEmail : String,
     tweetText : String,
     userName : String,
-    
+    "createdOn" : { "type": Date, "default": Date.now },
 })
 
 var tweetsModel = mongoose.model("tweets",tweetsSchema);

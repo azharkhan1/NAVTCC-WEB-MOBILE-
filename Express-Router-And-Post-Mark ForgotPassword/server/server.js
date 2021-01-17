@@ -150,8 +150,24 @@ app.get("/getTweets", (req, res, next) => {
         res.status(500).send("error");
     }
   })
-
 });
+
+app.get("/myTweets", (req, res, next) => {
+    console.log("my tweets user=>",req.body);
+    tweetsModel.find({userEmail : req.body.jToken.userEmail},(err,data)=>{
+      if(!err)
+      {
+          console.log("tweet data=>",data);
+          res.status(200).send({
+              tweets : data,
+          });
+      }
+      else{
+          console.log("error : ",err);
+          res.status(500).send("error");
+      }
+    })
+  });
 
 
 

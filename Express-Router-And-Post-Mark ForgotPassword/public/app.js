@@ -151,18 +151,14 @@ function checkOtp() {
 
 const getTweets = () => {
 
-
     const Http = new XMLHttpRequest();
     Http.open("GET", url + "/getTweets");
     Http.send();
     Http.onreadystatechange = (e) => {
         if (Http.readyState === 4) {
-
-            let data = JSON.parse((Http.responseText));
+            data = JSON.parse((Http.responseText));
             // console.log(data);
             for (let i = 0; i < data.tweets.length; i++) {
-
-
                 var eachTweet = document.createElement("li");
                 eachTweet.innerHTML =
                     `<h4 class="userName">
@@ -174,10 +170,13 @@ const getTweets = () => {
                 // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
                 document.getElementById("posts").appendChild(eachTweet)
 
-            }
+            }   
         }
     }
+
 }
+
+
 
 const postTweet = ()=>{
     
@@ -194,9 +193,37 @@ const postTweet = ()=>{
 
 }
 
+const myTweets = ()=>{
+    document.getElementById("posts").innerHTML = "";
+    const Http = new XMLHttpRequest();
+    Http.open("GET", url + "/myTweets");
+    Http.send();
+    Http.onreadystatechange = (e)=>{
+        if (Http.readyState === 4)
+        {
+           let jsonRes = JSON.parse(Http.responseText)
+            console.log(jsonRes);
+            for (let i = 0 ; i<jsonRes.tweets.length ; i++)
+            {
+                console.log(`this is ${i} tweet = ${jsonRes.tweets[i].tweetText}`);
+                
+                var eachTweet = document.createElement("li");
+                eachTweet.innerHTML =
+                    `<h4 class="userName">
+                    ${jsonRes.tweets[i].userName}
+                </h4> 
+                <p class="userPost">
+                    ${jsonRes.tweets[i].tweetText}
+                </p>`;
+                // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
+                document.getElementById("posts").appendChild(eachTweet)
+                
+            }
+        }
+    }
+}
+
 socket.on("NEW_POST", (newPost) => {
-
-
     var eachTweet = document.createElement("li");
     eachTweet.innerHTML =
         `<h4 class="userName">
@@ -210,8 +237,6 @@ socket.on("NEW_POST", (newPost) => {
 })
 
 
-
-
 let logout = () => {
     axios({
         method: "post",
@@ -222,3 +247,4 @@ let logout = () => {
         window.location.href = "login.html";
     })
 }
+

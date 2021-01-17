@@ -148,17 +148,24 @@ function checkOtp() {
     return false;
 
 }
+const clearTweets = ()=>{
+    document.getElementById("posts") = "";
+}
 
 const getTweets = () => {
-
+    var userEmail = sessionStorage.getItem("userEmail");
+    document.getElementById("posts").innerHTML = "";
     const Http = new XMLHttpRequest();
     Http.open("GET", url + "/getTweets");
     Http.send();
     Http.onreadystatechange = (e) => {
         if (Http.readyState === 4) {
+
             data = JSON.parse((Http.responseText));
             // console.log(data);
             for (let i = 0; i < data.tweets.length; i++) {
+               
+                // if (data.tweets[i] !== data.tweets)
                 var eachTweet = document.createElement("li");
                 eachTweet.innerHTML =
                     `<h4 class="userName">
@@ -202,10 +209,10 @@ const myTweets = ()=>{
         if (Http.readyState === 4)
         {
            let jsonRes = JSON.parse(Http.responseText)
-            console.log(jsonRes);
+            // console.log(jsonRes);
             for (let i = 0 ; i<jsonRes.tweets.length ; i++)
             {
-                console.log(`this is ${i} tweet = ${jsonRes.tweets[i].tweetText}`);
+                // console.log(`this is ${i} tweet = ${jsonRes.tweets[i].tweetText}`);
                 
                 var eachTweet = document.createElement("li");
                 eachTweet.innerHTML =

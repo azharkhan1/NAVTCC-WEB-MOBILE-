@@ -20,6 +20,8 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/2.0.2/timeago.js" integrity="sha512-N3oYWQZs8pMSQhQtB13XHSIry/zDIUimpMqX4QMULawuaAYgRWSiU17cLHh7f51xgkGY18jQtY2ph98HtKeWaA==" crossorigin="anonymous"></script>
+  <script src="./timeago.js"></script>
 </head>
 
 <body onload="getProfile()">
@@ -28,7 +30,7 @@
   <nav class="navbar navbar-light bg-light">
     <button onclick="myTweets()">My profile</button>
     <button onclick="getTweets()">Other's tweets</button>
-    
+    <p id="date" class="timeago"></p>
     <form class="form-inline">
       <h3 id="welcomeUser">
       </h3>

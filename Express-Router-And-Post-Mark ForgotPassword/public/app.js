@@ -1,7 +1,8 @@
 
 // const url = 'https://loginjwtmongo.herokuapp.com';
 const url = "http://localhost:5000";
-
+// document.getElementById("date").innerHTML = new Date('2019-06-11')
+timeago().render(document.querySelectorAll('.timeago'));
 var socket = io(url);
 
 socket.on('connect', function () {
@@ -160,19 +161,23 @@ const getTweets = () => {
     Http.send();
     Http.onreadystatechange = (e) => {
         if (Http.readyState === 4) {
-
+       
             data = JSON.parse((Http.responseText));
             // console.log(data);
+    
             for (let i = 0; i < data.tweets.length; i++) {
+                date = moment((data.tweets[i].createdOn)).fromNow()  
                 // if (data.tweets[i].userEmail !== userEmail) {
                     var eachTweet = document.createElement("li");
                     eachTweet.innerHTML =
                         `<h4 class="userName">
                     ${data.tweets[i].userName}
                 </h4> 
-                <p class="userPost">
+                <small class="timeago">${date}</small>
+                <p class="userPost" datetime=${date}>
                     ${data.tweets[i].tweetText}
                 </p>`;
+           
                     // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
                     document.getElementById("posts").appendChild(eachTweet)
                 // }
@@ -194,6 +199,7 @@ const postTweet = () => {
         userEmail: userEmail,
         tweetText: document.getElementById("tweetText").value,
     }))
+ 
 
     document.getElementById("tweetText").value = "";
 
@@ -209,16 +215,18 @@ const myTweets = () => {
             let jsonRes = JSON.parse(Http.responseText)
             // console.log(jsonRes);
             for (let i = 0; i < jsonRes.tweets.length; i++) {
-                // console.log(`this is ${i} tweet = ${jsonRes.tweets[i].tweetText}`);
+                // console.log(`this is ${i} tweet = ${jsonRes.tweets[i].createdOn}`);
 
                 var eachTweet = document.createElement("li");
                 eachTweet.innerHTML =
                     `<h4 class="userName">
                     ${jsonRes.tweets[i].userName}
                 </h4> 
+                <small class="timeago">${jsonRes.tweets[i].createdOn}</small>
                 <p class="userPost">
                     ${jsonRes.tweets[i].tweetText}
                 </p>`;
+
                 // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
                 document.getElementById("posts").appendChild(eachTweet)
 

@@ -282,6 +282,7 @@ button:hover {
     /* text-align: center; */
     display: flex;
     justify-content: center;
+    position: relative;
 }
 li{
   list-style: none;
@@ -337,4 +338,13 @@ ul{
 .userPost{
     width:100%;
     font-size:16px;
+}
+.timeago{
+  display: inline-block;
+  /* float: right; */
+  position: absolute;
+  right: -36px;
+  top: 20px;
+  font-size: 10px;
+  font-weight: bolder;
 }

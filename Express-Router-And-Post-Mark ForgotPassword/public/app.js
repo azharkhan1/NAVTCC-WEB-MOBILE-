@@ -113,7 +113,7 @@ function forgot_password() {
         alert(JSON.stringify(response.message));
         localStorage.setItem("forgot_email", document.getElementById("email").value);
         window.location.href = "reset-password.html";
-    
+
     }, (error) => {
         console.log(error);
     })
@@ -148,7 +148,7 @@ function checkOtp() {
     return false;
 
 }
-const clearTweets = ()=>{
+const clearTweets = () => {
     document.getElementById("posts") = "";
 }
 
@@ -164,20 +164,19 @@ const getTweets = () => {
             data = JSON.parse((Http.responseText));
             // console.log(data);
             for (let i = 0; i < data.tweets.length; i++) {
-               
-                // if (data.tweets[i] !== data.tweets)
-                var eachTweet = document.createElement("li");
-                eachTweet.innerHTML =
-                    `<h4 class="userName">
+                // if (data.tweets[i].userEmail !== userEmail) {
+                    var eachTweet = document.createElement("li");
+                    eachTweet.innerHTML =
+                        `<h4 class="userName">
                     ${data.tweets[i].userName}
                 </h4> 
                 <p class="userPost">
                     ${data.tweets[i].tweetText}
                 </p>`;
-                // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
-                document.getElementById("posts").appendChild(eachTweet)
-
-            }   
+                    // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
+                    document.getElementById("posts").appendChild(eachTweet)
+                // }
+            }
         }
     }
 
@@ -185,35 +184,33 @@ const getTweets = () => {
 
 
 
-const postTweet = ()=>{
-    
+const postTweet = () => {
+
     userEmail = sessionStorage.getItem("userEmail");
     const Http = new XMLHttpRequest();
-    Http.open("POST",url +"/postTweet")
+    Http.open("POST", url + "/postTweet")
     Http.setRequestHeader("Content-Type", "application/json");
     Http.send(JSON.stringify({
-        userEmail : userEmail,
-        tweetText : document.getElementById("tweetText").value,
+        userEmail: userEmail,
+        tweetText: document.getElementById("tweetText").value,
     }))
-    
+
     document.getElementById("tweetText").value = "";
 
 }
 
-const myTweets = ()=>{
+const myTweets = () => {
     document.getElementById("posts").innerHTML = "";
     const Http = new XMLHttpRequest();
     Http.open("GET", url + "/myTweets");
     Http.send();
-    Http.onreadystatechange = (e)=>{
-        if (Http.readyState === 4)
-        {
-           let jsonRes = JSON.parse(Http.responseText)
+    Http.onreadystatechange = (e) => {
+        if (Http.readyState === 4) {
+            let jsonRes = JSON.parse(Http.responseText)
             // console.log(jsonRes);
-            for (let i = 0 ; i<jsonRes.tweets.length ; i++)
-            {
+            for (let i = 0; i < jsonRes.tweets.length; i++) {
                 // console.log(`this is ${i} tweet = ${jsonRes.tweets[i].tweetText}`);
-                
+
                 var eachTweet = document.createElement("li");
                 eachTweet.innerHTML =
                     `<h4 class="userName">
@@ -224,7 +221,7 @@ const myTweets = ()=>{
                 </p>`;
                 // console.log(`User: ${tweets[i]} ${tweets[i].userPosts[j]}`)
                 document.getElementById("posts").appendChild(eachTweet)
-                
+
             }
         }
     }

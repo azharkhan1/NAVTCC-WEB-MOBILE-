@@ -6,6 +6,8 @@ import './index.css';
 
 function Bulb() {
   const [value, setValue] = useState(true);
+  const [temp, setTemp] = useState(22);
+
 
   // function abc(){
   //   setValue(false)
@@ -16,18 +18,17 @@ function Bulb() {
     setValue((preiousValue) => !preiousValue)
   }
 
-
-
   return (
-    <div className={(value === true) ? "dark" : "light"}>
-
-  
-    <div >
-      The bulb is {(value === true) ? "Bright" : "Dark"}
-      <button onClick={abc}>
-        Change
+    <div className={(value === true) ? "light" : "dark"}>
+      <div >
+        The bulb is {(value === true) ? "Bright" : "dark"}
+        <button onClick={abc}>
+          Change
       </button>
-    </div>
+        <p>{temp}</p>
+        <button onClick={() => setTemp(temp + 1)}>Increase Temprature</button>
+        <button onClick={() => temp > 0 ? setTemp(temp - 1) : ""}>Decrease Temprature</button>
+      </div>
     </div>
   )
 }

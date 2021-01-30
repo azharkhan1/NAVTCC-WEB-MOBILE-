@@ -14,7 +14,15 @@ code {
 
 .dark{
   background-color: black;
+  height:100vh;
+  color:white;
+  text-align: center;
+  margin: 10px 0 0 0 ;
+
 }
 .light{
   background-color: white;
+  height:100vh;
+  text-align: center;
+  margin: 10px 0 0 0 ;
 }
